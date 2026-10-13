@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AWS EC2 | Nginx Multi-Port Infrastructure</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f3f6fb;
+    color: #17263f;
+    line-height: 1.65;
+}
+
+header {
+    background: #101d35;
+    color: white;
+    padding: 23px 8%;
+    border-bottom: 4px solid #e99b35;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.logo { font-size: 23px; font-weight: 800; letter-spacing: 1px; }
+.logo span { color: #f0a744; }
+.nav-label { color: #c3d0e2; font-size: 12px; letter-spacing: 1px; }
+
+main { max-width: 1080px; margin: auto; padding: 52px 24px; }
+.eyebrow { color: #b76a12; font-size: 12px; font-weight: bold; letter-spacing: 2px; }
+h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.18; margin: 16px 0; }
+.intro { max-width: 790px; color: #5d6b80; font-size: 16px; line-height: 1.9; }
+
+.banner {
+    background: white;
+    border: 1px solid #dfe6f0;
+    border-left: 5px solid #e99b35;
+    padding: 22px;
+    border-radius: 8px;
+    margin: 28px 0 38px;
+}
+.banner h2 { font-size: 18px; margin-bottom: 6px; }
+.banner p { color: #617087; font-size: 14px; }
+
+.section-title { font-size: 23px; margin: 36px 0 18px; }
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    border: 1px solid #dfe6f0;
+    border-radius: 10px;
+    padding: 24px;
+}
+
+.number { color: #b76a12; font-size: 12px; font-weight: bold; letter-spacing: 1px; }
+.card h3 { font-size: 19px; margin: 12px 0 8px; }
+.card p { color: #647289; font-size: 14px; line-height: 1.8; }
+
+.port {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 5px 11px;
+    border-radius: 5px;
+    background: #edf2f9;
+    color: #233b5b;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.architecture {
+    background: #101d35;
+    color: white;
+    padding: 26px;
+    border-radius: 10px;
+    margin-top: 18px;
+}
+
+.architecture h3 { font-size: 20px; margin-bottom: 18px; }
+
+.details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 22px;
+}
+
+.label { color: #a9bdd8; font-size: 12px; margin-bottom: 4px; }
+.value { font-size: 15px; font-weight: bold; overflow-wrap: anywhere; }
+
+.stack { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.stack span {
+    background: #e8eef7;
+    color: #2b4263;
+    border-radius: 5px;
+    padding: 9px 13px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+footer {
+    background: #101d35;
+    color: #b9c8dc;
+    padding: 25px 8%;
+    text-align: center;
+    font-size: 12px;
+    line-height: 2;
+}
+footer strong { color: white; }
+
+@media (max-width: 600px) {
+    header { padding: 20px 6%; }
+    main { padding: 38px 18px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="nav">
+        <div class="logo">AWS <span>/</span> LINUX</div>
+        <div class="nav-label">CLOUD INFRASTRUCTURE PROJECT</div>
+    </div>
+</header>
+
+<main>
+    <div class="eyebrow">LINUX SYSTEM ADMINISTRATION</div>
+
+    <h1>AWS EC2 &amp; Nginx<br>Multi-Port Web Hosting</h1>
+
+    <p class="intro">
+        Deployment of an Nginx web server on Red Hat Enterprise Linux
+        using Amazon EC2, dedicated EBS storage, separate server blocks,
+        and three independent website document roots.
+    </p>
+
+    <div class="banner">
+        <h2>Infrastructure Deployment — Mumbai Region</h2>
+        <p>
+            A practical cloud infrastructure lab focused on Linux server
+            configuration, Nginx virtual hosting, storage management,
+            and SELinux access-control troubleshooting.
+        </p>
+    </div>
+
+    <h2 class="section-title">Nginx Server Configuration</h2>
+
+    <div class="grid">
+        <div class="card">
+            <div class="number">SERVER BLOCK 01</div>
+            <h3>Primary Website</h3>
+            <p>
+                Main Nginx website configured with a dedicated
+                document root and index file.
+            </p>
+            <div class="port">LISTEN PORT · 80</div>
+        </div>
+
+        <div class="card">
+            <div class="number">SERVER BLOCK 02</div>
+            <h3>Secondary Website</h3>
+            <p>
+                Independent website configuration with its own
+                listening port and content directory.
+            </p>
+            <div class="port">LISTEN PORT · 8080</div>
+        </div>
+
+        <div class="card">
+            <div class="number">SERVER BLOCK 03</div>
+            <h3>Additional Website</h3>
+            <p>
+                Third Nginx server block serving separate HTML content
+                from its dedicated document root.
+            </p>
+            <div class="port">LISTEN PORT · 8081</div>
+        </div>
+    </div>
+
+    <h2 class="section-title">Cloud Infrastructure Architecture</h2>
+
+    <div class="architecture">
+        <h3>Deployment Components</h3>
+        <div class="details">
+            <div>
+                <div class="label">CLOUD PROVIDER</div>
+                <div class="value">Amazon Web Services</div>
+            </div>
+            <div>
+                <div class="label">COMPUTE SERVICE</div>
+                <div class="value">Amazon EC2</div>
+            </div>
+            <div>
+                <div class="label">AWS REGION</div>
+                <div class="value">Asia Pacific · Mumbai</div>
+            </div>
+            <div>
+                <div class="label">OPERATING SYSTEM</div>
+                <div class="value">Red Hat Enterprise Linux</div>
+            </div>
+            <div>
+                <div class="label">WEB SERVER</div>
+                <div class="value">Nginx</div>
+            </div>
+            <div>
+                <div class="label">BLOCK STORAGE</div>
+                <div class="value">20 GB GP3 EBS · ext4</div>
+            </div>
+            <div>
+                <div class="label">MOUNT DIRECTORY</div>
+                <div class="value">/testdata</div>
+            </div>
+            <div>
+                <div class="label">WEBSITE DOCUMENT ROOTS</div>
+                <div class="value">/web80 · /web8080 · /web8081</div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="section-title">Implementation Highlights</h2>
+
+    <div class="grid">
+        <div class="card">
+            <div class="number">01 · STORAGE</div>
+            <h3>EBS Volume Management</h3>
+            <p>
+                Dedicated GP3 block storage formatted with ext4
+                and mounted at /testdata for website files.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="number">02 · CONFIGURATION</div>
+            <h3>Nginx Virtual Hosting</h3>
+            <p>
+                Three server blocks, individual document roots,
+                custom index files, and separate listening ports.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="number">03 · SECURITY</div>
+            <h3>SELinux Troubleshooting</h3>
+            <p>
+                Investigated audit denials and corrected website
+                file security contexts without disabling SELinux.
+            </p>
+        </div>
+    </div>
+
+    <h2 class="section-title">Technology Stack</h2>
+    <div class="stack">
+        <span>AWS EC2</span>
+        <span>Amazon EBS GP3</span>
+        <span>Red Hat Linux</span>
+        <span>Nginx</span>
+        <span>Linux CLI</span>
+        <span>ext4</span>
+        <span>SELinux</span>
+        <span>Security Groups</span>
+        <span>HTML5</span>
+        <span>CSS3</span>
+    </div>
+</main>
+
+<footer>
+    <strong>AWS CLOUD &amp; LINUX INFRASTRUCTURE</strong><br>
+    EC2 · Nginx Multi-Port Hosting · EBS Storage · SELinux
+</footer>
+
+</body>
+</html>
