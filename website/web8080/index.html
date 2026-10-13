@@ -2,281 +2,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AWS EC2 | Nginx Multi-Port Infrastructure</title>
-<style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux Server Monitoring | AWS Project</title>
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f3f6fb;
-    color: #17263f;
-    line-height: 1.65;
-}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-header {
-    background: #101d35;
-    color: white;
-    padding: 23px 8%;
-    border-bottom: 4px solid #e99b35;
-}
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #0b1120;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
 
-.nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-}
+        header {
+            background: #111c30;
+            padding: 24px 8%;
+            border-bottom: 2px solid #22c55e;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
 
-.logo { font-size: 23px; font-weight: 800; letter-spacing: 1px; }
-.logo span { color: #f0a744; }
-.nav-label { color: #c3d0e2; font-size: 12px; letter-spacing: 1px; }
+        header h2 {
+            color: #22c55e;
+            letter-spacing: 1px;
+        }
 
-main { max-width: 1080px; margin: auto; padding: 52px 24px; }
-.eyebrow { color: #b76a12; font-size: 12px; font-weight: bold; letter-spacing: 2px; }
-h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.18; margin: 16px 0; }
-.intro { max-width: 790px; color: #5d6b80; font-size: 16px; line-height: 1.9; }
+        header span {
+            color: #94a3b8;
+            font-size: 13px;
+        }
 
-.banner {
-    background: white;
-    border: 1px solid #dfe6f0;
-    border-left: 5px solid #e99b35;
-    padding: 22px;
-    border-radius: 8px;
-    margin: 28px 0 38px;
-}
-.banner h2 { font-size: 18px; margin-bottom: 6px; }
-.banner p { color: #617087; font-size: 14px; }
+        main {
+            max-width: 1100px;
+            margin: 55px auto;
+            padding: 0 24px;
+        }
 
-.section-title { font-size: 23px; margin: 36px 0 18px; }
+        .eyebrow {
+            color: #22c55e;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 18px;
-}
+        h1 {
+            font-size: clamp(30px, 5vw, 46px);
+            line-height: 1.2;
+            margin: 12px 0;
+        }
 
-.card {
-    background: white;
-    border: 1px solid #dfe6f0;
-    border-radius: 10px;
-    padding: 24px;
-}
+        .intro {
+            color: #94a3b8;
+            max-width: 720px;
+            margin-bottom: 30px;
+        }
 
-.number { color: #b76a12; font-size: 12px; font-weight: bold; letter-spacing: 1px; }
-.card h3 { font-size: 19px; margin: 12px 0 8px; }
-.card p { color: #647289; font-size: 14px; line-height: 1.8; }
+        .status-banner {
+            background: #12251f;
+            border: 1px solid #24543e;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 28px 0;
+        }
 
-.port {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 5px 11px;
-    border-radius: 5px;
-    background: #edf2f9;
-    color: #233b5b;
-    font-size: 12px;
-    font-weight: bold;
-}
+        .status-banner strong {
+            color: #4ade80;
+        }
 
-.architecture {
-    background: #101d35;
-    color: white;
-    padding: 26px;
-    border-radius: 10px;
-    margin-top: 18px;
-}
+        .status-banner p {
+            color: #a7b9b0;
+            margin-top: 5px;
+            font-size: 14px;
+        }
 
-.architecture h3 { font-size: 20px; margin-bottom: 18px; }
+        .section-title {
+            margin: 36px 0 18px;
+            font-size: 22px;
+        }
 
-.details {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 22px;
-}
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+        }
 
-.label { color: #a9bdd8; font-size: 12px; margin-bottom: 4px; }
-.value { font-size: 15px; font-weight: bold; overflow-wrap: anywhere; }
+        .card {
+            background: #111c30;
+            border: 1px solid #26364d;
+            border-radius: 10px;
+            padding: 24px;
+        }
 
-.stack { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
-.stack span {
-    background: #e8eef7;
-    color: #2b4263;
-    border-radius: 5px;
-    padding: 9px 13px;
-    font-size: 13px;
-    font-weight: bold;
-}
+        .card .label {
+            color: #94a3b8;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-footer {
-    background: #101d35;
-    color: #b9c8dc;
-    padding: 25px 8%;
-    text-align: center;
-    font-size: 12px;
-    line-height: 2;
-}
-footer strong { color: white; }
+        .card h3 {
+            margin: 12px 0 8px;
+            font-size: 22px;
+            color: #f8fafc;
+        }
 
-@media (max-width: 600px) {
-    header { padding: 20px 6%; }
-    main { padding: 38px 18px; }
-}
-</style>
+        .card p {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .tag {
+            display: inline-block;
+            color: #86efac;
+            background: #173326;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-top: 16px;
+        }
+
+        .workflow {
+            background: #111c30;
+            border: 1px solid #26364d;
+            border-radius: 10px;
+            padding: 24px;
+        }
+
+        .workflow ul {
+            list-style: none;
+        }
+
+        .workflow li {
+            padding: 10px 0;
+            border-bottom: 1px solid #26364d;
+            color: #cbd5e1;
+        }
+
+        .workflow li:last-child {
+            border-bottom: none;
+        }
+
+        .check {
+            color: #4ade80;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            color: #64748b;
+            border-top: 1px solid #26364d;
+            padding: 25px;
+            margin-top: 55px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 20px 6%;
+            }
+
+            main {
+                margin-top: 35px;
+                padding: 0 18px;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
 <header>
-    <div class="nav">
-        <div class="logo">AWS <span>/</span> LINUX</div>
-        <div class="nav-label">CLOUD INFRASTRUCTURE PROJECT</div>
-    </div>
+    <h2>LINUX / MONITOR</h2>
+    <span>AWS CLOUD OPERATIONS</span>
 </header>
 
 <main>
-    <div class="eyebrow">LINUX SYSTEM ADMINISTRATION</div>
+    <p class="eyebrow">Server Operations · Port 8080</p>
 
-    <h1>AWS EC2 &amp; Nginx<br>Multi-Port Web Hosting</h1>
+    <h1>Linux Server<br>Monitoring Dashboard</h1>
 
     <p class="intro">
-        Deployment of an Nginx web server on Red Hat Enterprise Linux
-        using Amazon EC2, dedicated EBS storage, separate server blocks,
-        and three independent website document roots.
+        A demonstration dashboard for Linux server administration,
+        service health checks, storage management, and operational
+        troubleshooting in an AWS EC2 environment.
     </p>
 
-    <div class="banner">
-        <h2>Infrastructure Deployment — Mumbai Region</h2>
+    <section class="status-banner">
+        <strong>● Monitoring Concepts Dashboard</strong>
         <p>
-            A practical cloud infrastructure lab focused on Linux server
-            configuration, Nginx virtual hosting, storage management,
-            and SELinux access-control troubleshooting.
+            Illustrative status indicators for a Linux administration
+            project. These values are examples, not live server metrics.
         </p>
-    </div>
+    </section>
 
-    <h2 class="section-title">Nginx Server Configuration</h2>
+    <h2 class="section-title">Server Operations Overview</h2>
 
-    <div class="grid">
-        <div class="card">
-            <div class="number">SERVER BLOCK 01</div>
-            <h3>Primary Website</h3>
+    <section class="grid">
+        <article class="card">
+            <p class="label">Service Management</p>
+            <h3>systemd</h3>
             <p>
-                Main Nginx website configured with a dedicated
-                document root and index file.
+                Manage services, inspect service states, and review
+                startup failures using systemctl.
             </p>
-            <div class="port">LISTEN PORT · 80</div>
-        </div>
+            <span class="tag">Service Operations</span>
+        </article>
 
-        <div class="card">
-            <div class="number">SERVER BLOCK 02</div>
-            <h3>Secondary Website</h3>
+        <article class="card">
+            <p class="label">Resource Monitoring</p>
+            <h3>CPU & Memory</h3>
             <p>
-                Independent website configuration with its own
-                listening port and content directory.
+                Review running processes and resource usage with
+                top, ps, and free.
             </p>
-            <div class="port">LISTEN PORT · 8080</div>
-        </div>
+            <span class="tag">Performance Checks</span>
+        </article>
 
-        <div class="card">
-            <div class="number">SERVER BLOCK 03</div>
-            <h3>Additional Website</h3>
+        <article class="card">
+            <p class="label">Storage Management</p>
+            <h3>EBS / Filesystems</h3>
             <p>
-                Third Nginx server block serving separate HTML content
-                from its dedicated document root.
+                Check disk capacity, filesystem usage, and mount points
+                with df, lsblk, and findmnt.
             </p>
-            <div class="port">LISTEN PORT · 8081</div>
-        </div>
-    </div>
+            <span class="tag">Persistent Storage</span>
+        </article>
 
-    <h2 class="section-title">Cloud Infrastructure Architecture</h2>
-
-    <div class="architecture">
-        <h3>Deployment Components</h3>
-        <div class="details">
-            <div>
-                <div class="label">CLOUD PROVIDER</div>
-                <div class="value">Amazon Web Services</div>
-            </div>
-            <div>
-                <div class="label">COMPUTE SERVICE</div>
-                <div class="value">Amazon EC2</div>
-            </div>
-            <div>
-                <div class="label">AWS REGION</div>
-                <div class="value">Asia Pacific · Mumbai</div>
-            </div>
-            <div>
-                <div class="label">OPERATING SYSTEM</div>
-                <div class="value">Red Hat Enterprise Linux</div>
-            </div>
-            <div>
-                <div class="label">WEB SERVER</div>
-                <div class="value">Nginx</div>
-            </div>
-            <div>
-                <div class="label">BLOCK STORAGE</div>
-                <div class="value">20 GB GP3 EBS · ext4</div>
-            </div>
-            <div>
-                <div class="label">MOUNT DIRECTORY</div>
-                <div class="value">/testdata</div>
-            </div>
-            <div>
-                <div class="label">WEBSITE DOCUMENT ROOTS</div>
-                <div class="value">/web80 · /web8080 · /web8081</div>
-            </div>
-        </div>
-    </div>
-
-    <h2 class="section-title">Implementation Highlights</h2>
-
-    <div class="grid">
-        <div class="card">
-            <div class="number">01 · STORAGE</div>
-            <h3>EBS Volume Management</h3>
+        <article class="card">
+            <p class="label">Log Analysis</p>
+            <h3>System Logs</h3>
             <p>
-                Dedicated GP3 block storage formatted with ext4
-                and mounted at /testdata for website files.
+                Investigate service errors and system events using
+                journalctl and log inspection commands.
             </p>
-        </div>
+            <span class="tag">Troubleshooting</span>
+        </article>
+    </section>
 
-        <div class="card">
-            <div class="number">02 · CONFIGURATION</div>
-            <h3>Nginx Virtual Hosting</h3>
-            <p>
-                Three server blocks, individual document roots,
-                custom index files, and separate listening ports.
-            </p>
-        </div>
+    <h2 class="section-title">Linux Troubleshooting Workflow</h2>
 
-        <div class="card">
-            <div class="number">03 · SECURITY</div>
-            <h3>SELinux Troubleshooting</h3>
-            <p>
-                Investigated audit denials and corrected website
-                file security contexts without disabling SELinux.
-            </p>
-        </div>
-    </div>
+    <section class="workflow">
+        <ul>
+            <li><span class="check">✓</span>Check service state with systemctl</li>
+            <li><span class="check">✓</span>Inspect recent events with journalctl</li>
+            <li><span class="check">✓</span>Review disk space and mounted filesystems</li>
+            <li><span class="check">✓</span>Inspect listening ports with ss</li>
+            <li><span class="check">✓</span>Verify application response with curl</li>
+        </ul>
+    </section>
 
-    <h2 class="section-title">Technology Stack</h2>
-    <div class="stack">
-        <span>AWS EC2</span>
-        <span>Amazon EBS GP3</span>
-        <span>Red Hat Linux</span>
-        <span>Nginx</span>
-        <span>Linux CLI</span>
-        <span>ext4</span>
-        <span>SELinux</span>
-        <span>Security Groups</span>
-        <span>HTML5</span>
-        <span>CSS3</span>
-    </div>
+    <h2 class="section-title">Project Environment</h2>
+
+    <section class="card">
+        <p class="label">Infrastructure</p>
+        <h3>AWS EC2 · Red Hat Linux · Nginx</h3>
+        <p>
+            This page is hosted as a separate Nginx website on port 8080.
+            The project also uses an EBS-backed storage mount at
+            /testdata and separate websites on ports 80 and 8081.
+        </p>
+        <span class="tag">Multi-Port Web Hosting Project</span>
+    </section>
 </main>
 
 <footer>
-    <strong>AWS CLOUD &amp; LINUX INFRASTRUCTURE</strong><br>
-    EC2 · Nginx Multi-Port Hosting · EBS Storage · SELinux
+    AWS EC2 + Nginx Multi-Port Project · Linux Server Operations
 </footer>
 
 </body>
