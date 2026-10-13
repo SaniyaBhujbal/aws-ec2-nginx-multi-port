@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Security & Access | LinuxOps</title>
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Arial, sans-serif; background: #f4f6f9; color: #202c40; }
+header { background: #14233a; color: white; padding: 30px 8%; }
+header small { color: #76d7c4; letter-spacing: 2px; }
+header h1 { font-size: 32px; margin: 12px 0 8px; }
+header p { color: #bdc9d9; line-height: 1.7; }
+main { max-width: 1000px; margin: 35px auto; padding: 0 22px; }
+h2 { font-size: 21px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 17px; margin: 22px 0; }
+.card { background: white; border: 1px solid #e1e6ed; border-radius: 10px; padding: 22px; }
+.card p { color: #647187; line-height: 1.7; font-size: 14px; }
+.tag { font-size: 12px; font-weight: bold; color: #087d70; }
+pre { background: #14233a; color: #d8e8f7; padding: 19px; border-radius: 8px; overflow-x: auto; line-height: 1.8; font-size: 13px; }
+.warning { background: #fff4df; border-left: 4px solid #d99b27; padding: 17px; line-height: 1.7; border-radius: 5px; }
+section { margin-top: 32px; }
+footer { margin-top: 38px; border-top: 1px solid #dfe5ed; padding: 22px 0; color: #778399; font-size: 13px; }
+</style>
+</head>
+<body>
+<header>
+    <small>LINUXOPS / SECURITY</small>
+    <h1>Security & Access Control</h1>
+    <p>Understanding how Linux permissions and SELinux policies
+    protect web server resources.</p>
+</header>
+<main>
+    <section>
+        <h2>Security Controls in Practice</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="tag">CONTROL 01</div>
+                <h3>SELinux Enforcement</h3>
+                <p>Mandatory access control restricts what a service can
+                access, even when ordinary Linux permissions allow access.</p>
+            </div>
+            <div class="card">
+                <div class="tag">CONTROL 02</div>
+                <h3>File Security Contexts</h3>
+                <p>Web content uses the httpd_sys_content_t type so the
+                web server can read appropriately labelled content.</p>
+            </div>
+            <div class="card">
+                <div class="tag">CONTROL 03</div>
+                <h3>Port Policy</h3>
+                <p>SELinux port types help determine which ports a
+                confined web server process may bind to.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Troubleshooting Reference</h2>
+        <pre>
+# Inspect SELinux file labels
+ls -lZ /testdata/web8081/index.html
+
+# Inspect allowed HTTP port types
+sudo semanage port -l | grep http_port_t
+
+# Define persistent web content labels
+sudo semanage fcontext -a -t httpd_sys_content_t "/testdata(/.*)?"
+
+# Apply expected labels
+sudo restorecon -Rv /testdata
+
+# Investigate recent SELinux denials
+sudo ausearch -m AVC -ts recent
+        </pre>
+    </section>
+
+    <section>
+        <h2>Incident: HTTP 403 Forbidden</h2>
+        <div class="warning">
+            <strong>Root cause identified in the lab:</strong><br>
+            SELinux audit records showed Nginx was denied access to
+            index.html files labelled unlabeled_t. The files were
+            relabelled to httpd_sys_content_t and the HTTP endpoints
+            were tested again.
+        </div>
+    </section>
+
+    <section>
+        <h2>Operational Principle</h2>
+        <p style="color:#647187;line-height:1.8">
+            Diagnose the denial, verify the relevant policy and file
+            context, make the smallest appropriate correction, and
+            confirm access. Keep SELinux enforcing instead of disabling
+            a security control to bypass the problem.
+        </p>
+    </section>
+
+    <footer>Linux System Administration Lab · SELinux & Web Server Security</footer>
+</main>
+</body>
+</html>
