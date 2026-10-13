@@ -91,24 +91,25 @@ This project provided hands-on practice with Linux server administration, cloud 
 
 ## 📸 Project Screenshots
 
-### 1. EC2 Instance
-![EC2 Instance](screenshots/EC2 instance.png)
+### 1. EC2 Instance in Mumbai Region
+![EC2 Instance](screenshots/EC2%20instance.png)
 
-### 2. EBS Volume Attached
-![EBS Volume Attached](ebs-attached.png)
+### 2. EBS Volume Attached to EC2
+![EBS Volume Attached](screenshots/ebs-attached.png)
 
 ### 3. EBS Volume Mounted at `/testdata`
-![EBS Mount](ebs-mounted-testdata.png)
+![EBS Mounted](screenshots/ebs-mounted-testdata.png)
 
-### 4. Website on Port 80
-![Website Port 80](website-port-80.png)
+### 4. Nginx Service Running
+![Nginx Running](screenshots/nginx-running.png)
 
-### 5. Website on Port 8080
-![Website Port 8080](website-port-8080.png)
+### 5. Website Running on Port 80
+![Website Port 80](screenshots/website-port-80.png)
 
-### 6. Website on Port 8081
-![Website Port 8081](website-port-8081.png)
+### 6. Website Running on Port 8080
+![Website Port 8080](screenshots/website-port-8080.png)
 
-### 7. Nginx Running
-![Nginx Running](nginx-running.png)
+### 7. Website Running on Port 8081
+![Website Port 8081](screenshots/website-port-8081.png)
+
 
